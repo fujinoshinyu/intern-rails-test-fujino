@@ -1,0 +1,42 @@
+<div class="ml-5">
+  <h2>タスク一覧</h2>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to("ALL", {controller: :tasks, action: :index}, {class: "nav-link #{"active" unless Task::STATUS.values.include?(@status_filter)}", "aria-current": "page"}) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to("ToDo", {controller: :tasks, action: :index, status_filter: Task::STATUS[:todo]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:todo]}"}) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to("InProgress", {controller: :tasks, action: :index, status_filter: Task::STATUS[:doing]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:doing]}"}) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to("Review", {controller: :tasks, action: :index, status_filter: Task::STATUS[:review]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:review]}"}) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to("Completed", {controller: :tasks, action: :index, status_filter: Task::STATUS[:completed]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:completed]}"}) %>
+    </li>
+  </ul>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">title</th>
+      <th scope="col">description</th>
+      <th scope="col">完了期限</th>
+      <th scope="col">作成日</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @tasks.each_with_index do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= link_to(task.title, {controller: :tasks, action: :show, id: task.id}) %></td>
+        <td><%= task.description %></td>
+        <td><%= task.due_date %></td>
+        <td><%= task.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 FROM ruby:2.7.4
 RUN apt-get update -qq \
     && apt-get install -y nodejs postgresql-client npm \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     && npm install --global yarn
 RUN mkdir /myapp
