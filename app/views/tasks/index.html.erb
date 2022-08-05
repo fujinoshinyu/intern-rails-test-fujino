@@ -25,6 +25,7 @@
       <th scope="col">description</th>
       <th scope="col">完了期限</th>
       <th scope="col">作成日</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
         <td><%= task.description %></td>
         <td><%= task.due_date %></td>
         <td><%= task.created_at %></td>
+        <td><%= link_to("削除",{controller: :tasks, action: :destroy, id: task.id}, {data: { confirm: "【確認】削除しますか？" }, method: :delete, class: "btn btn-primary btn-sm"}) %></td>
       </tr>
     <% end %>
     </tbody>

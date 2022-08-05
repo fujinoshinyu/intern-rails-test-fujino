@@ -1,6 +1,6 @@
 <div class="ml-5">
   <h2><%= @task.title %></h2>
-  <%= form_with url: "/tasks/#{@task.id}/update_status", method: :put do |form| %>
+  <%= form_with url: "/tasks/#{@task.id}/update_status", method: :put, local: true do |form| %>
     <%= form.select :status, Task::STATUS.to_a, { selected: @task.status }, { class: "form-select mr-3 mt-5","aria-label": "Default select example"} %>
     <%= form.submit "更新", class: "btn btn-primary btn-sm"  %>
   <% end %>
@@ -9,4 +9,7 @@
   <p><%=@task.description %></p>
   <p class="mt-5">期限</p>
   <p><%=@task.due_date %></p>
+
+  <%= link_to("編集",{controller: :tasks, action: :edit, id: @task.id}, {class: "btn btn-primary btn-sm mt-5"}) %><br>
+  <%= link_to("削除",{controller: :tasks, action: :destroy, id: @task.id}, {data: { confirm: "【確認】削除しますか？" }, method: :delete, class: "btn btn-primary btn-sm mt-3"}) %>
 </div>

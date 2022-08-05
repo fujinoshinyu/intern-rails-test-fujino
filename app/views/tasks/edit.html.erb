@@ -1,0 +1,15 @@
+<div class="ml-5">
+  <h2>編集</h2><br>
+
+  <%= form_with url: "/tasks/#{@task.id}", method: :put, local: true do |form| %>
+    <%= form.label "タイトル"%><br>
+    <%= form.text_field :title, value: @task.title %><br><br>
+    <%= form.label "ステータス"%><br>
+    <%= form.select :status, Task::STATUS.to_a, { default: @task.status}, { class: "form-select","aria-label": "Default select example"} %><br><br>
+    <%= form.label "タスク詳細"%><br>
+    <%= form.text_area :description, value: @task.description %><br>
+    <%= form.label "期限"%><br>
+    <%= form.date_field :due_date, value: @task.due_date%><br>
+    <%= form.submit "更新", class: "btn btn-primary btn-sm mt-5"  %>
+  <% end %>
+</div>

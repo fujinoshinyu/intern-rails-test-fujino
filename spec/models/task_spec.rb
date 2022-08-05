@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Task, type: :model do
@@ -37,4 +39,3 @@ describe Task, type: :model do
     end
   end
 end
-

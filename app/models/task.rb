@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 class Task < ApplicationRecord
   # Railsを知らなくても読解可能なように敢えてenumは使用しません
-  STATUS = { todo: 1, doing: 2, review: 3, completed: 4}
+  STATUS = { todo: 1, doing: 2, review: 3, completed: 4 }.freeze
 
   validates :status, inclusion: { in: STATUS.values }
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :due_date, presence: true
 
   def doing!
     self.status = STATUS[:todo]
   end
-
 
   def reviewable?
     status == STATUS[:doing]

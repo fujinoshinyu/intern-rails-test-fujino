@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :task, class: Task do
     title { Faker::Book.title }
@@ -7,7 +9,7 @@ FactoryBot.define do
 
     # statusを指定するtrait
     # 例）create(:task, :review)
-    # →reviewでつくられる
+    # の場合、reviewでつくられる
     Task::STATUS.each do |k, v|
       trait :"#{k}" do
         status { v }
@@ -15,4 +17,3 @@ FactoryBot.define do
     end
   end
 end
-
