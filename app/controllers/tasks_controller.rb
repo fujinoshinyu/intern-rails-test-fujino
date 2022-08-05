@@ -17,12 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
-      title: params[:title],
-      status: params[:status],
-      description: params[:description],
-      due_date: params[:due_date]
-    )
+    @task = Task.new(create_params)
     @task.save!
 
     redirect_to "/tasks/#{@task.id}", flash: { success: '作成に成功しました' }
@@ -38,13 +33,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id].to_i)
-    @task.update!(
-      title: params[:title],
-      status: params[:status],
-      description: params[:description],
-      due_date: params[:due_date]
-    )
+    @task = Task.find(update_params[:id].to_i)
+    @task.update!(update_params)
 
     redirect_to "/tasks/#{@task.id}", flash: { success: '更新に成功しました' }
   rescue StandardError => e
@@ -72,5 +62,15 @@ class TasksController < ApplicationController
   rescue StandardError => e
     flash[:danger] = "削除に失敗しました。#{e.message}"
     redirect_to '/tasks'
+  end
+
+  private
+
+  def create_params
+    params.permit(:title, :status, :description, :due_date)
+  end
+
+  def update_params
+    params.permit(:id, :title, :status, :description, :due_date)
   end
 end
