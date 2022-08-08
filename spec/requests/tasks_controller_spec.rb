@@ -5,14 +5,14 @@ require 'rails_helper'
 describe TasksController, type: :request do
   describe 'PATCH #update' do
     subject { put "/tasks/#{task.id}", params: params }
-    let!(:params) {
+    let!(:params) do
       {
         title: Faker::Book.title,
         status: Task::STATUS[:doing],
         description: Faker::String.random,
         due_date: Faker::Date.between(from: Date.current - 30.days, to: Date.current + 30.days)
       }
-    }
+    end
 
     context 'タスクがtodoの場合' do
       let!(:task) { FactoryBot.create(:task, :todo) }

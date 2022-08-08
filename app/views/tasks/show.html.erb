@@ -1,4 +1,11 @@
 <div class="ml-5">
+  <div class="bg-warning  w-50">
+    <% @task.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
+      </ul>
+    <% end %>
+  </div>
   <div class="border border-dark w-50 p-3 rounded">
     <h2><%= @task.title %></h2>
     <%= form_with url: "/tasks/#{@task.id}/update_status", method: :put, local: true do |form| %>

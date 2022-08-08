@@ -1,5 +1,12 @@
 <div class="ml-5">
   <h2>編集</h2><br>
+  <div class="bg-warning">
+    <% @task.errors.full_messages.each do |message| %>
+      <ul>
+        <li><%= message %></li>
+      </ul>
+    <% end %>
+  </div>
 
   <%= form_with url: "/tasks/#{@task.id}", method: :put, local: true do |form| %>
     <%= form.label "タイトル"%><br>
