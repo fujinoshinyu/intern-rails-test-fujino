@@ -12,7 +12,6 @@ class Task < ApplicationRecord
   def update_status(status)
     # 課題１
 
-    update!(status: status)
-    false
+    update(status: status)
   end
 end
