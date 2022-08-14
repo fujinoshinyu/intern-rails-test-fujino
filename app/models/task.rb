@@ -10,8 +10,6 @@ class Task < ApplicationRecord
   validates :due_date, presence: { message: '期限を入力してください' }
 
   def update_status(status)
-    # 課題１
-
     update(status: status)
   end
 end

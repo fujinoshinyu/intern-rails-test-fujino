@@ -39,16 +39,17 @@ log配下にrailsログが出力されているのでそちらでも確認でき
 Linux / Mac の場合
 `tail -f log/development.log`
 
-# 課題
-適切な変数名を用い、必要に応じてメソッドやクラスを定義してください
+## 課題ルール
+* 適切な変数名を用い、必要に応じてメソッドやクラスを定義してください。
+* ソースコード上に適宣コメントを残してください。
+* インターネットでの検索やコピー＆ペーストは自由にして構いません。
 
 ## 課題1
-app/models/task.rbの以下のメソッドについて、要件を満たすように拡張してください
+app/models/task.rbの以下のメソッドについて、要件を満たすように拡張してください。
 
 ```ruby
 # 引数には変更したいstatusがIntegerで渡される
 def update_status(status)
-    #課題１
     
     update(status: status)
 end
@@ -79,20 +80,63 @@ tasksテーブルのstatusカラム(Integer)は、ステータス遷移にルー
 
 ## 課題2
 
-spec/models/tasks_spec.rbに、課題１の要件を満たすテストコードを書いてください<br>
-todoのタスクを別のステータスに変える場合のテストは既に実装されているため、参考にしてください
+spec/models/tasks_spec.rbに、課題１の要件を満たすテストコードを書いてください。<br>
+test用のgem（ライブラリ）はrspecを使用しています。<br>
+todoのタスクを別のステータスに変える場合のテストは既に実装されているため、参考にしてください。
 
 - (dockerコンテナの起動中に) テストコードの実行<br>
 `docker-compose exec rails-app rspec`
 
 ## 課題3
 
-WIP: 検索機能
+http://localhost:3000/tasks
+
+上記URLでアクセス可能なタスク一覧ページの検索機能は未実装です。<br>
+app/controllers/tasks_controller.rbの以下のメソッドを編集することで検索機能を実装してください。
+
+
+```ruby
+def index
+  @status_filter = params[:status_filter].to_i
+  filtered_tasks = @status_filter.zero? ? Task.all : Task.where(status: @status_filter)
+
+  # 検索語句
+  # string
+  # ex) "タスク"
+  search_words = params[:search_words]
+  # 期限の絞り込み開始日
+  # string
+  # ex) "2022-08-09"
+  due_date_start = params[:due_date_start]
+  # 期限の絞り込み終了日　
+  # string
+  # ex) "2022-08-10"
+  due_date_end = params[:due_date_end]
+
+  @tasks = filtered_tasks
+end
+```
+
+### 要件
+* 検索ワードによって絞り込みが可能。
+  * タスクのタイトル、詳細（title, description）で一致するものを取得できる。
+  * 難しい場合には片方だけの検索で構いません
+  * 検索ワードは変数`search_words`に代入されています。
+  
+
+* タスクの期限（due_date）によっても絞り込みが可能。
+  * 絞り込みの開始日～終了日の間が期限のタスクを取得できる。
+  * どちらかのみ入力された場合は開始日以降、終了日以前のタスクが取得できる。
+  * 絞り込みの開始日、終了日はそれぞれ`due_date_start`、`due_date_end`に代入されています。
+    * ただし、文字列型で代入されるため絞り込みで用いるためには`Date.parse()`を使用してください
+  
+
+* 絞り込みの完了したタスクの配列はインスタンス変数`@tasks`に代入することでページに反映されます。
 
 ## 課題4
 
 下記コードには、あまり適切ではない構造・書き方の部分があります。<br>
-どこに問題があると思われるか、このREADMEに記述してください
+どこに問題があると思われるか、このREADMEに記述してください。
 
 WIP
 ```ruby

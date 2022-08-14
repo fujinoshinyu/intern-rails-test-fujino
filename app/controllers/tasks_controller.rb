@@ -4,9 +4,19 @@ class TasksController < ApplicationController
   def index
     @status_filter = params[:status_filter].to_i
     filtered_tasks = @status_filter.zero? ? Task.all : Task.where(status: @status_filter)
-    # search_words = params[:search_words]　# string ex) "タスク"
-    # due_date_start = params[:due_date_start]　# string ex) "2022-08-09"
-    # due_date_end = params[:due_date_end] # string ex) "2022-08-10"
+
+    # 検索語句
+    # string
+    # ex) "タスク"
+    search_words = params[:search_words]
+    # 期限の絞り込み開始日　
+    # string
+    # ex) "2022-08-09"
+    due_date_start = params[:due_date_start]
+    # 期限の絞り込み終了日　
+    # string
+    # ex) "2022-08-09"
+    due_date_end = params[:due_date_end]
 
     @tasks = filtered_tasks
   end

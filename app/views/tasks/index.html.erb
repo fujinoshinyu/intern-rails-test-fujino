@@ -17,12 +17,28 @@
       <%= link_to("Completed", {controller: :tasks, action: :index, status_filter: Task::STATUS[:completed]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:completed]}"}) %>
     </li>
   </ul>
+  <div>
+    <%= form_with url: "/tasks", method: :get, local: true do |form| %>
+      <div class="d-flex justify-content-end align-items-center mb-3 mt-3">
+        <%= form.hidden_field :status_filter, :value => @status_filter %>
+        <%= form.label "検索ワード：", class: "mr-1 mb-0" %><br>
+        <%= form.text_field :search_words, class: "mr-4"%><br><br>
+        <%= form.label "期限：", class: "mr-1 mb-0"%><br>
+        <%= form.date_field :due_date_start, class: "mr-3" %><br>
+        <div class="mr-3">～</div>
+        <%= form.date_field :due_date_end, class: "mr-5" %><br>
+        <%= form.submit "検索", class: "btn btn-primary btn-sm mr-5" %>
+      </div>
+    <% end %>
+  </div>
+
   <table class="table">
     <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">title</th>
-      <th scope="col">description</th>
+      <th scope="col">タイトル</th>
+      <th scope="col">ステータス</th>
+      <th scope="col">詳細</th>
       <th scope="col">完了期限</th>
       <th scope="col">作成日</th>
       <th scope="col"></th>
@@ -34,9 +50,10 @@
       <tr>
         <td><%= task.id %></td>
         <td><%= link_to(task.title, {controller: :tasks, action: :show, id: task.id}) %></td>
+        <td><%= Task::STATUS.key(task.status) %></td>
         <td><%= task.description %></td>
         <td><%= task.due_date %></td>
-        <td><%= task.created_at %></td>
+        <td><%= task.created_at.strftime("%Y-%m-%d %T") %></td>
         <td><%= link_to("編集",{controller: :tasks, action: :edit, id: task.id}, {class: "btn btn-primary btn-sm"}) %></td>
         <td><%= link_to("削除",{controller: :tasks, action: :destroy, id: task.id}, {data: { confirm: "【確認】削除しますか？" }, method: :delete, class: "btn btn-primary btn-sm"}) %></td>
       </tr>
