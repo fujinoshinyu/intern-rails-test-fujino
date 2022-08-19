@@ -1,20 +1,20 @@
-# intern-rails-test
-インターン採用でのスキルチェック
+># intern-rails-test
+>インターン生のためのスキルチェック
 
 # 開発環境
 このリポジトリを自分のアカウントへ、ForkではなくDuplicateしてください。<br>
-必要ならプライベートリポジトリーにしても大丈夫です。<br>
+必要ならプライベートリポジトリにしても大丈夫です。<br>
 作業はDuplicateした自分のリポジトリで作業を行い、コミット・プッシュしてください。
 
-参考資料
-https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository
+参考資料<br>
+[Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository#mirroring-a-repository)
+
 
 
 ## Docker Desktopの導入
 
-dockerを使用したことがない方は導入してください
-
-https://www.docker.com/products/docker-desktop/
+[docker](https://www.docker.com/products/docker-desktop/)
+を使用したことがない方は導入してください
 
 ## 初期構築
 
@@ -51,23 +51,23 @@ Linux / Mac の場合
 * 適切な変数名を用い、必要に応じてメソッドやクラスを定義してください。
 * ソースコード上に適宣コメントを残してください。
 * インターネットでの検索やコピー＆ペーストは自由にして構いません。
+* 課題に関する質問は自由にしていただいて構いません。
 * データベースにtasksテーブルを用意しています。
   * テーブルの詳細は以下マイグレーションファイルを参照してください。
     * db/migrate/20220731083408_create_tasks.rb
   * Railsアプリケーションでは基本的にActive Recordを用いてデータベースの情報を取得・更新します。
-    * https://railsguides.jp/active_record_basics.html
+    * [Active Record の基礎](https://railsguides.jp/active_record_basics.html)
     * 今回の場合はActiveRecordを継承したTaskモデル（クラス）を用意しているので活用してください。
-  
 
+<br>  
 
-このコーディングテストでは、元の知識が豊富か・課題を完璧に解けるかということよりも、<br>
-課題やわからないものに対してどうアプローチするかに重点を置いています。<br>
-完成しなかった場合でも、どう考えたか・何をインプットしたかはコメントを残すようにしてください。
-
+>このコーディングテストでは、元の知識が豊富か・課題を完璧に解けるかということよりも、 
+> 課題やわからないものに対してどうアプローチするかに重点を置いています。<br>
+RubyOnRailsについては実務時にキャッチアップしてもらえれば十分なため、完成しなかった場合でも、どう考えたか・何をインプットしたかはコメントを残すようにしてください。
 
 ## 課題1
-app/models/task.rbのstatus_checkメソッドについて、要件を満たすように拡張してください。
-
+app/models/task.rbのstatus_checkメソッドについて、要件を満たすように拡張してください。<br>
+必要に応じて処理を切り出し、同メソッドから呼び出しても構いません。
 
 動作確認
 
@@ -91,6 +91,8 @@ statusの値とステータス名の関係↓<br>
 * これらのルールにそぐわなかった場合、メソッド内で以下を実行してupdateを中断する。<br>
   ※以下のメソッドを実行すると、updateは行われず画面上にエラーメッセージが表示される。<br>
   `errors.add(:status, 'エラーメッセージ')`
+  
+* 変更前のステータスは`attribute_in_database(:status)`、変更後のステータスは`status`で取得可能です。
 
 
 ## 課題2
@@ -111,16 +113,16 @@ app/controllers/tasks_controller.rbのindexメソッドを編集することで�
 
 ### 要件
 * 検索ワードによって絞り込みが可能。
-  * タスクのタイトル、詳細（title, description）で一致するものを取得できる。
+  * タスクのタイトル、詳細（title, description）が検索ワードを含むものを取得できる。
   * 難しい場合にはタイトルか詳細の一方だけの検索で構いません
-  * 検索ワードは変数`search_words`に代入されています。
+  * リクエストで受け取った検索ワードは`params[:search_words]`で取得できます。
   
 
 * タスクの期限（due_date）によっても絞り込みが可能
   * 絞り込みの開始日と終了日を指定して絞り込みができる
   * 開始日のみ入力された場合は開始日以降のタスクが取得できる
   * 終了日のみ入力された場合は終了日以前のタスクが取得できる
-  * フロントから受け取った開始日、終了日はそれぞれ`params[:due_date_start]`、`params[:due_date_end]`で取得可能です
+  * リクエストで受け取った開始日、終了日はそれぞれ`params[:due_date_start]`、`params[:due_date_end]`で取得可能です
 
 * 絞り込みの完了したタスクの配列はインスタンス変数`@tasks`に代入することでページに反映されます。
 

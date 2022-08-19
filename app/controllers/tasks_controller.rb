@@ -4,19 +4,24 @@ class TasksController < ApplicationController
   def index
     @status_filter = params[:status_filter].to_i
     filtered_tasks = @status_filter.zero? ? Task.all : Task.where(status: @status_filter)
+    ###
+    # クエリサンプル
+    # filtered_tasksにメソッドチェーンすることで以下のようにクエリ条件を追加することが可能です
+    # filtered_tasks = filtered_tasks.where("due_date >=", Date.current)
+    # filtered_tasks = filtered_tasks.order(:created_at)
+    ###
 
-    # 検索語句
-    # string
-    # ex) "タスク"
-    search_words = params[:search_words]
-    # 期限の絞り込み開始日　
-    # string
-    # ex) "2022-08-09"
-    due_date_start = params[:due_date_start]
-    # 期限の絞り込み終了日　
-    # string
-    # ex) "2022-08-09"
-    due_date_end = params[:due_date_end]
+    # 検索語句 string
+    # ex) "検索ワード"
+    logger.debug("検索ワードはparams[:search_words]で取得可能です。\n値：#{params[:search_words]}")
+
+    # 期限の絞り込み開始日 string
+    # ex) "yyyy-mm-dd"
+    logger.debug("期限の絞り込み開始日はparams[:due_date_start]で取得可能です。\n値：#{params[:due_date_start]}")
+
+    # 期限の絞り込み終了日　string
+    # ex) "yyyy-mm-dd"
+    logger.debug("期限の絞り込み終了日はparams[:due_date_end]で取得可能です。\n値：#{params[:due_date_end]}")
 
     @tasks = filtered_tasks
   end

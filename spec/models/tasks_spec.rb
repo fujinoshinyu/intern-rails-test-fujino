@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 describe Task, type: :model do
-  describe '#update_status' do
+  describe '#update' do
     # テスト対象のメソッド
     # taskとstatusはそれぞれ下の条件内で定義される
-    subject { task.update_status(status) }
+    subject { task.update(status: status) }
 
     context 'タスクがtodoの場合' do
       # todoのタスクを作成

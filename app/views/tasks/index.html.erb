@@ -8,7 +8,7 @@
       <%= link_to("ToDo", {controller: :tasks, action: :index, status_filter: Task::STATUS[:todo]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:todo]}"}) %>
     </li>
     <li class="nav-item">
-      <%= link_to("InProgress", {controller: :tasks, action: :index, status_filter: Task::STATUS[:doing]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:doing]}"}) %>
+      <%= link_to("Doing", {controller: :tasks, action: :index, status_filter: Task::STATUS[:doing]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:doing]}"}) %>
     </li>
     <li class="nav-item">
       <%= link_to("Review", {controller: :tasks, action: :index, status_filter: Task::STATUS[:review]}, {class: "nav-link #{"active" if @status_filter == Task::STATUS[:review]}"}) %>

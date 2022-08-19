@@ -14,11 +14,11 @@ class Task < ApplicationRecord
 
   def status_check
     # 変更前のステータス
-    current_status = attribute_in_database(:status)
+    logger.debug("変更前のステータスはattribute_in_database(:status)で取得可能です。\n値：#{attribute_in_database(:status)}")
     # 変更後のステータス
-    # status
+    logger.debug("変更後のステータスはstatusで取得可能です。\n値：#{status}")
 
-    # 更新を中止し、エラーを格納する
+    # 更新を中止するため、エラーを格納する
     # errors.add(:status, 'エラーメッセージ')
   end
 end
