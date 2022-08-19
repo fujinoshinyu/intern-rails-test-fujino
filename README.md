@@ -1,7 +1,7 @@
 # intern-rails-test
 インターン生のためのスキルチェック用のRailsアプリ
 
-# 開発環境
+## 開発環境
 このリポジトリを自分のアカウントへ、ForkではなくDuplicateしてください。  
 必要ならプライベートリポジトリにしても大丈夫です。  
 作業はDuplicateした自分のリポジトリで作業を行い、コミット・プッシュしてください。
@@ -10,12 +10,13 @@
 [Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository#mirroring-a-repository)
 
 
-
-## Docker Desktopの導入
+---
+### Docker Desktopの導入
 
 [docker](https://www.docker.com/products/docker-desktop/)
 を使用したことがない方は導入してください
 
+---
 ### 初期構築
 
 - dockerコンテナのbuild
@@ -26,6 +27,7 @@
 
 `docker-compose run rails-app rails db:create db:migrate db:seed`
 
+---
 ### 開発時
 - dockerコンテナの起動
 
@@ -47,30 +49,29 @@ log配下にrailsログが出力されているのでそちらでも確認でき
 Linux / Mac の場合
 `tail -f log/development.log`
 
-# 課題
-## ルール
+## 課題
+### ルール
 * 適切な変数名を用い、必要に応じてメソッドやクラスを定義してください。
 * ソースコード上に適宣コメントを残してください。
 * インターネットでの検索やコピー＆ペーストは自由にして構いません。
 * 課題に関する質問は自由にしていただいて構いません。
 
-このコーディングテストでは、元の知識が豊富か・課題を完璧に解けるかということよりも、 
-課題やわからないものに対してどうアプローチするかに重点を置いています。<br>
-RubyOnRailsについては実務時にキャッチアップしてもらえれば十分なため、完成しなかった場合でも、
-どう考えたか・何をインプットしたかをコメントを残すようにしてください。
+このコーディングテストでは、元の知識が豊富か・課題を完璧に解けるかということよりも、 課題やわからないものに対してどうアプローチするかに重点を置いています。<br>
+RubyOnRailsについては実務時にキャッチアップしてもらえれば十分なため、完成しなかった場合でも、どう考えたか・何をインプットしたかをコメントを残すようにしてください。
 
-## 課題1
+---
+### 課題1
+
 app/models/task.rbのstatus_checkメソッドについて、要件を満たすように拡張してください。<br>
 必要に応じて処理を切り出し、同メソッドから呼び出しても構いません。
 
-動作確認
+**動作確認**
 
 http://localhost:3000/tasks/1
 
 このページのステータス更新機能を拡張してもらいます。
 
-### 要件
-
+**要件**
 現状tasksテーブルのstatusカラム(Integer)は上記ページから好きなステータスに変更可能である。<br>
 それを以下のような要件に変更する。
 
@@ -88,8 +89,8 @@ statusの値とステータス名の関係↓<br>
   
 * 変更前のステータスは`attribute_in_database(:status)`、変更後のステータスは`status`で取得可能です。
 
-
-## 課題2
+---
+### 課題2
 
 spec/models/tasks_spec.rbに、課題１の要件を満たすテストコードを書いてください。<br>
 test用のgem（ライブラリ）はrspecを使用しています。<br>
@@ -98,14 +99,15 @@ todoのタスクを別のステータスに変える場合のテストは既に�
 - (dockerコンテナの起動中に) テストコードの実行<br>
 `docker-compose exec rails-app rspec`
 
-## 課題3
+---
+### 課題3
 
 http://localhost:3000/tasks
 
 上記URLでアクセス可能なタスク一覧ページの検索機能は未実装です。<br>
 app/controllers/tasks_controller.rbのindexメソッドを編集することで検索機能を実装してください。
 
-### 要件
+**要件**
 * 検索ワードによって絞り込みが可能。
   * タスクのタイトル、詳細（title, description）が検索ワードを含むものを取得できる。
   * 難しい場合にはタイトルか詳細の一方だけの検索で構いません
@@ -122,7 +124,8 @@ app/controllers/tasks_controller.rbのindexメソッドを編集することで�
 
 <br>
 
-## 補足
+---
+### 補足
 * データベースにtasksテーブルを用意しています。
   * テーブルの詳細は以下マイグレーションファイルを参照してください。
     * db/migrate/20220731083408_create_tasks.rb
@@ -132,4 +135,5 @@ app/controllers/tasks_controller.rbのindexメソッドを編集することで�
 
 <br>  
 
+---
 ### 課題は以上となります。
