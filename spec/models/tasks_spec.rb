@@ -5,11 +5,15 @@ require 'rails_helper'
 describe Task, type: :model do
   describe '#update_status' do
     # テスト対象のメソッド
-    # taskとstatusは下で定義される
+    # taskとstatusはそれぞれ下の条件内で定義される
     subject { task.update_status(status) }
 
     context 'タスクがtodoの場合' do
       # todoのタスクを作成
+      # 変数定義
+      # let!(:変数名) { 代入される値 }
+      # FactoryBot.create(:テーブル名, :オプション)でテストデータの作成
+      # オプションに:todo, :doing, :review, :completedを指定するとそれぞれのステータスで作られる
       let!(:task) { FactoryBot.create(:task, :todo) }
 
       context '引数にdoingの数字(2)を渡すと' do
@@ -29,7 +33,7 @@ describe Task, type: :model do
         it 'reviewステータスには遷移せず、値は更新されない' do
           # subjectでテスト対象のメソッドを実行
           subject
-          # Task.find(task.id).statusがtodoであることを確認
+          # Task.find(task.id).statusがtodoのままであることを確認
           expect(Task.find(task.id).status).to eq(Task::STATUS[:todo])
         end
       end
@@ -46,6 +50,13 @@ describe Task, type: :model do
 
     context 'タスクがdoingの場合' do
       let!(:task) { FactoryBot.create(:task, :doing) }
+
+      context '何をすると' do
+        it 'どうなるか' do
+          subject
+          expect(Task.find(task.id).status).to eq('何と一致するか')
+        end
+      end
     end
   end
 end

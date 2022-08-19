@@ -2,6 +2,14 @@
 インターン採用でのスキルチェック
 
 # 開発環境
+このリポジトリを自分のアカウントへ、ForkではなくDuplicateしてください。<br>
+必要ならプライベートリポジトリーにしても大丈夫です。<br>
+作業はDuplicateした自分のリポジトリで作業を行い、コミット・プッシュしてください。
+
+参考資料
+https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository
+
+
 ## Docker Desktopの導入
 
 dockerを使用したことがない方は導入してください
@@ -48,18 +56,18 @@ Linux / Mac の場合
     * db/migrate/20220731083408_create_tasks.rb
   * Railsアプリケーションでは基本的にActive Recordを用いてデータベースの情報を取得・更新します。
     * https://railsguides.jp/active_record_basics.html
-    * 今回の場合はActiveRecordを継承したTaskモデル（クラス）を活用してください。
+    * 今回の場合はActiveRecordを継承したTaskモデル（クラス）を用意しているので活用してください。
+  
+
+
+このコーディングテストでは、元の知識が豊富か・課題を完璧に解けるかということよりも、<br>
+課題やわからないものに対してどうアプローチするかに重点を置いています。<br>
+完成しなかった場合でも、どう考えたか・何をインプットしたかはコメントを残すようにしてください。
+
 
 ## 課題1
-app/models/task.rbの以下のメソッドについて、要件を満たすように拡張してください。
+app/models/task.rbのstatus_checkメソッドについて、要件を満たすように拡張してください。
 
-```ruby
-# 引数には変更したいstatusがIntegerで渡される
-def update_status(status)
-    
-    update(status: status)
-end
-```
 
 動作確認
 
@@ -69,10 +77,11 @@ http://localhost:3000/tasks/1
 
 ### 要件
 
-現状tasksテーブルのstatusカラム(Integer)は上記ページから好きなステータスに変更可能である。
+現状tasksテーブルのstatusカラム(Integer)は上記ページから好きなステータスに変更可能である。<br>
 それを以下のような要件に変更する。
 
 tasksテーブルのstatusカラム(Integer)は、ステータス遷移にルールがある。<br>
+statusの値とステータス名の関係↓<br>
   ( todo：1, doing：2, review：3, completed：4 )<br>
 
 * todoのタスクはdoingにのみ遷移できる。
@@ -98,61 +107,23 @@ todoのタスクを別のステータスに変える場合のテストは既に�
 http://localhost:3000/tasks
 
 上記URLでアクセス可能なタスク一覧ページの検索機能は未実装です。<br>
-app/controllers/tasks_controller.rbの以下のメソッドを編集することで検索機能を実装してください。
-
-
-```ruby
-def index
-  @status_filter = params[:status_filter].to_i
-  filtered_tasks = @status_filter.zero? ? Task.all : Task.where(status: @status_filter)
-
-  # 検索語句
-  # string
-  # ex) "タスク"
-  search_words = params[:search_words]
-  # 期限の絞り込み開始日
-  # string
-  # ex) "2022-08-09"
-  due_date_start = params[:due_date_start]
-  # 期限の絞り込み終了日　
-  # string
-  # ex) "2022-08-10"
-  due_date_end = params[:due_date_end]
-
-  @tasks = filtered_tasks
-end
-```
+app/controllers/tasks_controller.rbのindexメソッドを編集することで検索機能を実装してください。
 
 ### 要件
 * 検索ワードによって絞り込みが可能。
   * タスクのタイトル、詳細（title, description）で一致するものを取得できる。
-  * 難しい場合には片方だけの検索で構いません
+  * 難しい場合にはタイトルか詳細の一方だけの検索で構いません
   * 検索ワードは変数`search_words`に代入されています。
   
 
-* タスクの期限（due_date）によっても絞り込みが可能。
-  * 絞り込みの開始日～終了日の間が期限のタスクを取得できる。
-  * どちらかのみ入力された場合は開始日以降、終了日以前のタスクが取得できる。
-  * 絞り込みの開始日、終了日はそれぞれ`due_date_start`、`due_date_end`に代入されています。
-    * ただし、文字列型で代入されるため絞り込みで用いるためには`Date.parse()`を使用してください
-  
+* タスクの期限（due_date）によっても絞り込みが可能
+  * 絞り込みの開始日と終了日を指定して絞り込みができる
+  * 開始日のみ入力された場合は開始日以降のタスクが取得できる
+  * 終了日のみ入力された場合は終了日以前のタスクが取得できる
+  * フロントから受け取った開始日、終了日はそれぞれ`params[:due_date_start]`、`params[:due_date_end]`で取得可能です
 
 * 絞り込みの完了したタスクの配列はインスタンス変数`@tasks`に代入することでページに反映されます。
 
-## 課題4
+<br>
 
-下記コードには、あまり適切ではない構造・書き方の部分があります。<br>
-どこに問題があると思われるか、このREADMEに記述してください。
-
-WIP
-```ruby
-class Hoge
-end
-
-class Fuga
-
-end
-```
-
-<回答欄><br>
-この～は、、、、～なので、、、、。
+### 課題は以上となります。
