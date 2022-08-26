@@ -9,6 +9,12 @@
 参考資料  
 [Duplicating a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository#mirroring-a-repository)
 
+[個人メモ」
+リポジトリの複製に少し時間がかかりました。新しいリポジトリにミラープッシュする際に、「remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see ・・・・・・・・・・」といったエラーが発生し、2021年の８月１３日からGitでリモートにアクセスが出来なくなっていることが原因でした。以下の手順で解決することができました！
+①自分のアカウントから[setting>Developer setting>Personal access tokens>Scopesの指定>アクセストークンの取得]
+②[取得したアクセストークンをコピー>キーチェーンアクセス.appを開く>github.comのパスワードを先ほどコピーしたトークンで上書きする]
+③これでリモートに接続ができるようになりました。
 
 ---
 ### Docker Desktopの導入
