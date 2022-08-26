@@ -11,7 +11,7 @@
 
 ##[個人メモ」
 リポジトリの複製に少し時間がかかりました。新しいリポジトリにミラープッシュする際に、「remote: Support for password authentication was removed on August 13, 2021.
-remote: Please see ・・・・・・・・・・」といったエラーが発生し、2021年の８月１３日からGitでリモートにアクセスが出来なくなっていることが原因でした。以下の手順で解決することができました！
+remote: Please see ・・・・・・・・・・」といったエラーが発生し、2021年の８月１３日からGitでリモートへのアクセスがパスワードではなく、個人のアクセストークンが必要になったことが原因でした。以下の手順で解決することができました！
 
 ①自分のアカウントから[setting>Developer setting>Personal access tokens>Scopesの指定>アクセストークンの取得]
 
