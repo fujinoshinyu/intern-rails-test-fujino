@@ -37,6 +37,17 @@ remote: Please see ・・・・・・・・・・」といったエラーが発�
 
 `docker-compose run rails-app rails db:create db:migrate db:seed`
 
+##[個人メモ]
+
+「＄　docker-compose up」を実行した際に、
+[ERROR:
+        Can't find a suitable configuration file in this directory or any
+        parent. Are you in the right directory?
+
+        Supported filenames: docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml]
+        
+        というエラーが発生しました。私の認識が合っているか分かりませんが、「自分のいるディレクトリが正しくないため、ymlファイル等が見当たらない。」といった意味だと考えた結果、自分のいるディレクトリが間違っている事に気づき、[intern-rails-test-fujino]に移動し、実行すると上手く動作しました。
+
 ---
 ### 開発時
 - dockerコンテナの起動
