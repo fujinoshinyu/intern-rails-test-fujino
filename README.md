@@ -59,6 +59,11 @@ log配下にrailsログが出力されているのでそちらでも確認でき
 Linux / Mac の場合
 `tail -f log/development.log`
 
+##[個人メモ]
+「＄　docker-compose up」を実行した際に、 [ERROR: Can't find a suitable configuration file in this directory or any parent. Are you in the right directory? Supported filenames: docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml]
+というエラーが発生しました。私の認識が合っているか分かりませんが、「自分のいるディレクトリが正しくないため、ymlファイル等が見当たらない。」といった意味だと考えた結果、自分のいるディレクトリが間違っている事に気づき、[intern-rails-test-fujino]に移動し、実行すると上手く動作しました。
+
+
 ## 課題
 ### ルール
 * 適切な変数名を用い、必要に応じてメソッドやクラスを定義してください。
